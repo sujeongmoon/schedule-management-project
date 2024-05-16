@@ -48,7 +48,7 @@ public class ScheduleService {
 		// 해당 스케줄이 DB에 존재하는지 확인
 		Schedule schedule = findSchedule(id);
 
-		if (schedule.getPassword().equals(requestDto.getPassword())){
+		if (checkPassword(schedule, requestDto)){
 			// schedule 내용 수정
 			schedule.update(requestDto);
 		} else throw new IllegalArgumentException("입력하신 비밀번호가 틀렸습니다.");
@@ -56,12 +56,14 @@ public class ScheduleService {
 		return id;
 	}
 
-	public Long deleteSchedule(Long id) {
-		// 해당 메모가 DB에 존재하는지 확인
+	public Long deleteSchedule(Long id, ScheduleRequestDto requestDto) {
+		// 해당 스케줄이 DB에 존재하는지 확인
 		Schedule schedule = findSchedule(id);
 
-		// memo 삭제
-		scheduleRepository.delete(schedule);
+		if (checkPassword(schedule, requestDto)){
+			// schedule 삭제
+			scheduleRepository.delete(schedule);
+		} else throw new IllegalArgumentException("입력하신 비밀번호가 틀렸습니다.");
 
 		return id;
 	}
@@ -70,6 +72,11 @@ public class ScheduleService {
 		return scheduleRepository.findById(id).orElseThrow(() ->
 			new IllegalArgumentException("선택한 스케줄은 존재하지 않습니다.")
 		);
+	}
+
+	// schedule의 비밀번호와 입력받은 객체의 비밀번호가 같은지 비교
+	private boolean checkPassword(Schedule schedule, ScheduleRequestDto requestDto) {
+		return schedule.getPassword().equals(requestDto.getPassword());
 	}
 
 }

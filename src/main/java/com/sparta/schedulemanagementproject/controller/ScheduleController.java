@@ -48,9 +48,12 @@ public class ScheduleController {
 		return scheduleService.getSchedule(id);
 	}
 
+	// 5단계 : 선택한 일정 삭제
+	// DELETE http://localhost:8080/api/schedule/{id}
+	// {"password":"1234"}
 	@DeleteMapping("/schedule/{id}")
-	public Long deleteMemo(@PathVariable Long id) {
-		return scheduleService.deleteSchedule((id));
+	public Long deleteMemo(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
+		return scheduleService.deleteSchedule(id, requestDto);
 	}
 }
 
