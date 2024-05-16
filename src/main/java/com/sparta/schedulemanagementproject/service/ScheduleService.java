@@ -40,7 +40,7 @@ public class ScheduleService {
 
 	public List<ScheduleResponseDto> getSchedules() {
 		// DB 조회
-		return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).toList();
+		return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ScheduleResponseDto::new).toList();
 	}
 
 	@Transactional

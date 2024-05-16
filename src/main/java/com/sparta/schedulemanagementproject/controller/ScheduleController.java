@@ -32,6 +32,8 @@ public class ScheduleController {
 		return scheduleService.getSchedule(id);
 	}
 
+	// 3단계 : 일정 목록 조회 (내림차순)
+	// GET http://localhost:8080/api/schedules
 	@GetMapping("/schedules")
 	public List<ScheduleResponseDto> getSchedules() {
 		return scheduleService.getSchedules();
