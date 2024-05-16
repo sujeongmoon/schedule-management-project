@@ -28,7 +28,7 @@ public class ScheduleController {
 	// 2단계 : 선택한 일정 조회
 	// GET http://localhost:8080/api/schedule/{id}
 	@GetMapping("/schedule/{id}")
-	public ScheduleResponseDto getScheduleI(@PathVariable Long id) {
+	public ScheduleResponseDto getSchedule(@PathVariable Long id) {
 		return scheduleService.getSchedule(id);
 	}
 
@@ -39,9 +39,13 @@ public class ScheduleController {
 		return scheduleService.getSchedules();
 	}
 
+	// 4단계 : 선택한 일정 수정
+	// PUT http://localhost:8080/api/schedule/{id}
+	// {"title":"제목2", "contents":"내용2", "manager":"수정", "password":"1234"}
 	@PutMapping("/schedule/{id}")
-	public long updateMemo(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
-		return scheduleService.updateSchedule(id, requestDto); ////???!?
+	public ScheduleResponseDto updateMemo(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
+		scheduleService.updateSchedule(id, requestDto);
+		return scheduleService.getSchedule(id);
 	}
 
 	@DeleteMapping("/schedule/{id}")

@@ -45,11 +45,13 @@ public class ScheduleService {
 
 	@Transactional
 	public Long updateSchedule(Long id, ScheduleRequestDto requestDto) {
-		// 해당 메모가 DB에 존재하는지 확인
+		// 해당 스케줄이 DB에 존재하는지 확인
 		Schedule schedule = findSchedule(id);
 
-		// memo 내용 수정
-		schedule.update(requestDto);
+		if (schedule.getPassword().equals(requestDto.getPassword())){
+			// schedule 내용 수정
+			schedule.update(requestDto);
+		} else throw new IllegalArgumentException("입력하신 비밀번호가 틀렸습니다.");
 
 		return id;
 	}

@@ -24,7 +24,7 @@ public class Schedule{
 	private String contents;
 	@Column(name = "manager", nullable = false)
 	private String manager;
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, updatable = false)
 	private String password;
 	@Temporal(TemporalType.DATE)//SQL에서 date타입으로 받기
 	@Column(name = "createdAt", nullable = false, updatable = false)
@@ -43,6 +43,7 @@ public class Schedule{
 		this.title = requestDto.getTitle();
 		this.contents = requestDto.getContents();
 		this.manager = requestDto.getManager();
+		this.password = requestDto.getPassword();
 	}
 
 }
