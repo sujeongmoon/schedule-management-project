@@ -32,6 +32,12 @@ public class ScheduleService {
 		return scheduleResponseDto;
 	}
 
+	public ScheduleResponseDto getSchedule(Long id) {
+		Schedule schedule = findSchedule(id);
+		ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(schedule);
+		return scheduleResponseDto;
+	}
+
 	public List<ScheduleResponseDto> getSchedules() {
 		// DB 조회
 		return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).toList();

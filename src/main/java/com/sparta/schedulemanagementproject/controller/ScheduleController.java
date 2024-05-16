@@ -25,6 +25,13 @@ public class ScheduleController {
 		return scheduleService.createSchedule(requestDto);
 	}
 
+	// 2단계 : 선택한 일정 조회
+	// GET http://localhost:8080/api/schedule/{id}
+	@GetMapping("/schedule/{id}")
+	public ScheduleResponseDto getScheduleI(@PathVariable Long id) {
+		return scheduleService.getSchedule(id);
+	}
+
 	@GetMapping("/schedules")
 	public List<ScheduleResponseDto> getSchedules() {
 		return scheduleService.getSchedules();
