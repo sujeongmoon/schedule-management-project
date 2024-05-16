@@ -1,5 +1,7 @@
 package com.sparta.schedulemanagementproject.entity;
 
+import java.util.Date;
+
 import com.sparta.schedulemanagementproject.dto.ScheduleRequestDto;
 
 import jakarta.persistence.*;
@@ -12,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "schedule") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
-public class Schedule extends Timestamped{
+public class Schedule{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //PK 자동생성
 	private Long id;
@@ -24,6 +26,9 @@ public class Schedule extends Timestamped{
 	private String manager;
 	@Column(name = "password", nullable = false)
 	private String password;
+	@Temporal(TemporalType.DATE)//SQL에서 date타입으로 받기
+	@Column(name = "createdAt", nullable = false, updatable = false)
+	private Date createdAt;
 
 
 	public Schedule(ScheduleRequestDto requestDto) {
@@ -31,6 +36,7 @@ public class Schedule extends Timestamped{
 		this.contents = requestDto.getContents();
 		this.manager = requestDto.getManager();
 		this.password = requestDto.getPassword();
+		this.createdAt = requestDto.getCreatedAt();
 	}
 
 	public void update(ScheduleRequestDto requestDto) {

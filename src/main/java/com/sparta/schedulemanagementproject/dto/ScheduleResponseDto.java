@@ -1,6 +1,6 @@
 package com.sparta.schedulemanagementproject.dto;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.sparta.schedulemanagementproject.entity.Schedule;
 
@@ -11,17 +11,13 @@ public class ScheduleResponseDto {
 	private String title;
 	private String contents;
 	private String manager;
-	private String password;
-	private LocalDateTime createdAt;
-	private LocalDateTime modifiedAt;
+	private Date createdAt;
 
 	public ScheduleResponseDto(Schedule schedule) {
 		this.id = schedule.getId();
 		this.title = schedule.getTitle();
 		this.contents = schedule.getContents();
 		this.manager = schedule.getManager();
-		this.password = schedule.getPassword();
 		this.createdAt = schedule.getCreatedAt();
-		this.modifiedAt = schedule.getModifiedAt();
 	}
 }

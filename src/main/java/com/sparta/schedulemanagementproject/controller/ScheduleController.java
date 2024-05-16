@@ -17,6 +17,9 @@ public class ScheduleController {
 		this.scheduleService = scheduleService;
 	}
 
+	// 1단계 : 일정 작성
+	// POST http://localhost:8080/api/schedule
+	// {"title":"제목", "contents":"내용", "manager":"담당자", "password":"1234", "createdAt" : "2024-05-17"}
 	@PostMapping("/schedule")
 	public ScheduleResponseDto createSchedule(@RequestBody ScheduleRequestDto requestDto) {
 		return scheduleService.createSchedule(requestDto);
