@@ -32,10 +32,10 @@ public class Schedule{
 
 
 	public Schedule(ScheduleRequestDto requestDto) {
+		this.password = requestDto.getPassword();
 		this.title = requestDto.getTitle();
 		this.contents = requestDto.getContents();
 		this.manager = requestDto.getManager();
-		this.password = requestDto.getPassword();
 		this.createdAt = requestDto.getCreatedAt();
 	}
 
@@ -44,6 +44,11 @@ public class Schedule{
 		this.contents = requestDto.getContents();
 		this.manager = requestDto.getManager();
 		this.password = requestDto.getPassword();
+	}
+
+	// schedule의 비밀번호와 입력받은 객체의 비밀번호가 같은지 비교
+	public boolean checkPassword(ScheduleRequestDto requestDto) {
+		return this.getPassword().equals(requestDto.getPassword());
 	}
 
 }
