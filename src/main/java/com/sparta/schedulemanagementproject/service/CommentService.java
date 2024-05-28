@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sparta.schedulemanagementproject.dto.CommentRequestDto;
 import com.sparta.schedulemanagementproject.dto.CommentResponseDto;
+import com.sparta.schedulemanagementproject.dto.ScheduleRequestDto;
 import com.sparta.schedulemanagementproject.entity.Comment;
 import com.sparta.schedulemanagementproject.entity.Schedule;
 import com.sparta.schedulemanagementproject.repository.CommentRepository;
@@ -46,6 +47,16 @@ public class CommentService {
 		CommentResponseDto commentResponseDto = new CommentResponseDto(comment);
 
 		return commentResponseDto;
+	}
+
+	public Long deleteComment(Long commentId, CommentRequestDto requestDto) {
+		Comment comment = findComment(commentId);
+
+		if (comment.checkUserIdEquals(requestDto)){
+			commentRepository.delete(comment);
+		} else throw new IllegalArgumentException("입력하신 담당자 ID가 저장된 담당자 ID와 다릅니다.");
+
+		return  commentId;
 	}
 
 	public Comment findComment(Long commentId) {
