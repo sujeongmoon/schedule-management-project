@@ -1,7 +1,5 @@
 package com.sparta.schedulemanagementproject.entity;
 
-import com.sparta.schedulemanagementproject.dto.ScheduleRequestDto;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,38 +8,41 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "schedule")
+@Table(name = "comment")
 @NoArgsConstructor
-public class Schedule extends Timestamped{
+public class Comment extends Timestamped{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long scheduleId;
+	private Long commentId;
 	@Column(nullable = false)
-	private String scheduleTitle;
+	private String commentTitle;
 	@Column(nullable = false, length = 500)
-	private String scheduleContents;
+	private String commentContents;
 	@Column(nullable = false)
-	private String userName;
-	@Column(nullable = false, updatable = false)
-	private String schedulePassword;
+	private String userId;
 
-	public Schedule(ScheduleRequestDto requestDto) {
-		this.schedulePassword = requestDto.getSchedulePassword();
+	@ManyToOne
+	@JoinColumn(name="scheduleId")
+	private Schedule schedule;
+
+/*	public Comment(CommentRequestDto requestDto) {
+		this.commentContents = requestDto.getCommentContents();
+		this.userId = requestDto.getUserId();
+	}*/
+/*
+
+	public void update(CommentRequestDto requestDto) {
 		this.scheduleTitle = requestDto.getScheduleTitle();
 		this.scheduleContents = requestDto.getScheduleContents();
 		this.userName = requestDto.getUserName();
-	}
-
-	public void update(ScheduleRequestDto requestDto) {
-		this.scheduleTitle = requestDto.getScheduleTitle();
-		this.scheduleContents = requestDto.getScheduleContents();
-		this.userName = requestDto.getUserName();
 		this.schedulePassword = requestDto.getSchedulePassword();
 	}
 
+	// schedule의 비밀번호와 입력받은 객체의 비밀번호가 같은지 비교
 	public boolean checkPassword(ScheduleRequestDto requestDto) {
 		return this.getSchedulePassword().equals(requestDto.getSchedulePassword());
 	}
+*/
 
 }
 

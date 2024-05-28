@@ -20,56 +20,46 @@ public class ScheduleService {
 	}
 
 	public ScheduleResponseDto createSchedule(ScheduleRequestDto requestDto) {
-		// RequestDto -> Entity
 		Schedule schedule = new Schedule(requestDto);
-
-		// DB 저장
 		Schedule saveSchedule = scheduleRepository.save(schedule);
-
-		// Entity -> ResponseDto
 		ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(saveSchedule);
 
 		return scheduleResponseDto;
 	}
 
-	public ScheduleResponseDto getSchedule(Long id) {
-		Schedule schedule = findSchedule(id);
+	public ScheduleResponseDto getSchedule(Long scheduleId) {
+		Schedule schedule = findSchedule(scheduleId);
 		ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(schedule);
 		return scheduleResponseDto;
 	}
 
 	public List<ScheduleResponseDto> getSchedules() {
-		// DB 조회
 		return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ScheduleResponseDto::new).toList();
 	}
 
 	@Transactional
-	public Long updateSchedule(Long id, ScheduleRequestDto requestDto) {
-		// 해당 스케줄이 DB에 존재하는지 확인
-		Schedule schedule = findSchedule(id);
+	public Long updateSchedule(Long scheduleId, ScheduleRequestDto requestDto) {
+		Schedule schedule = findSchedule(scheduleId);
 
 		if (schedule.checkPassword(requestDto)){
-			// schedule 내용 수정
 			schedule.update(requestDto);
 		} else throw new IllegalArgumentException("입력하신 비밀번호가 틀렸습니다.");
 
-		return id;
+		return scheduleId;
 	}
 
-	public Long deleteSchedule(Long id, ScheduleRequestDto requestDto) {
-		// 해당 스케줄이 DB에 존재하는지 확인
-		Schedule schedule = findSchedule(id);
+	public Long deleteSchedule(Long scheduleId, ScheduleRequestDto requestDto) {
+		Schedule schedule = findSchedule(scheduleId);
 
 		if (schedule.checkPassword(requestDto)){
-			// schedule 삭제
 			scheduleRepository.delete(schedule);
 		} else throw new IllegalArgumentException("입력하신 비밀번호가 틀렸습니다.");
 
-		return id;
+		return scheduleId;
 	}
 
-	private Schedule findSchedule(Long id) {
-		return scheduleRepository.findById(id).orElseThrow(() ->
+	public Schedule findSchedule(Long scheduleId) {
+		return scheduleRepository.findById(scheduleId).orElseThrow(() ->
 			new IllegalArgumentException("선택한 스케줄은 존재하지 않습니다.")
 		);
 	}

@@ -22,7 +22,7 @@ public class ScheduleController {
 
 	// 1단계 : 일정 작성
 	// POST http://localhost:8080/api/schedules
-	// {"title":"제목", "contents":"내용", "manager":"담당자", "password":"1234", "createdAt" : "2024-05-17"}
+	// {"title":"제목", "contents":"내용", "manager":"담당자", "password":"1234"}
 	@PostMapping("/schedules")
 	public ResponseEntity<CommonResponse<ScheduleResponseDto>> createSchedule(@RequestBody ScheduleRequestDto requestDto) {
 		ScheduleResponseDto responseDto = scheduleService.createSchedule(requestDto);
