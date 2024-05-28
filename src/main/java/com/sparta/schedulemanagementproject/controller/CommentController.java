@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,5 +38,18 @@ public class CommentController {
 				.build());
 	}
 
+	// 3단계 : comment 수정
+	// PUT http://localhost:8080/api/schedules/comments/{commentId}
+	// {"commentContents":"댓글 내용", "userId":"담당자 Id"}
+	@PutMapping("/schedules/comments/{commentId}")
+	public ResponseEntity<CommonResponse<CommentResponseDto>> updateComment(@PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
+		CommentResponseDto responseDto = commentService.updateComment(commentId, requestDto);
+		return ResponseEntity.ok()
+			.body(CommonResponse.<CommentResponseDto>builder()
+				.statusCode(HttpStatus.OK.value())
+				.msg("수정이 완료됐습니다.")
+				.data(responseDto)
+				.build());
+	}
 
 }

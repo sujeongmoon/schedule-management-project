@@ -32,11 +32,19 @@ public class Comment extends Timestamped{
 		this.schedule = schedule;
 	}
 
-	// 댓글 내용이 비어있는 경우 예외처리
+	public void update(CommentRequestDto requestDto) {
+		this.commentContents = requestDto.getCommentContents();
+	}
+
+	// 댓글 내용이 비어있는지 확인
 	public boolean checkContentsNull(CommentRequestDto requestDto) {
 		return "".equals(requestDto.getCommentContents());
 	}
 
+	// 담당자 id가 일치하는지 확인
+	public boolean checkUserIdEquals(CommentRequestDto requestDto){
+		return this.getUserId().equals(requestDto.getUserId());
+	}
 
 }
 
