@@ -1,7 +1,6 @@
 package com.sparta.schedulemanagementproject.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import com.sparta.schedulemanagementproject.entity.Schedule;
 

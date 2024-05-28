@@ -1,5 +1,7 @@
 package com.sparta.schedulemanagementproject.entity;
 
+import com.sparta.schedulemanagementproject.dto.CommentRequestDto;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +16,6 @@ public class Comment extends Timestamped{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long commentId;
-	@Column(nullable = false)
-	private String commentTitle;
 	@Column(nullable = false, length = 500)
 	private String commentContents;
 	@Column(nullable = false)
@@ -25,24 +25,18 @@ public class Comment extends Timestamped{
 	@JoinColumn(name="scheduleId")
 	private Schedule schedule;
 
-/*	public Comment(CommentRequestDto requestDto) {
+
+	public Comment(CommentRequestDto requestDto, Schedule schedule) {
 		this.commentContents = requestDto.getCommentContents();
 		this.userId = requestDto.getUserId();
-	}*/
-/*
-
-	public void update(CommentRequestDto requestDto) {
-		this.scheduleTitle = requestDto.getScheduleTitle();
-		this.scheduleContents = requestDto.getScheduleContents();
-		this.userName = requestDto.getUserName();
-		this.schedulePassword = requestDto.getSchedulePassword();
+		this.schedule = schedule;
 	}
 
-	// schedule의 비밀번호와 입력받은 객체의 비밀번호가 같은지 비교
-	public boolean checkPassword(ScheduleRequestDto requestDto) {
-		return this.getSchedulePassword().equals(requestDto.getSchedulePassword());
+	// 댓글 내용이 비어있는 경우 예외처리
+	public boolean checkContentsNull(CommentRequestDto requestDto) {
+		return "".equals(requestDto.getCommentContents());
 	}
-*/
+
 
 }
 

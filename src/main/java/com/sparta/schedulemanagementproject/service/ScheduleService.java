@@ -10,14 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ScheduleService {
 
 	private final ScheduleRepository scheduleRepository;
-
-	public ScheduleService(ScheduleRepository scheduleRepository) {
-		this.scheduleRepository = scheduleRepository;
-	}
 
 	public ScheduleResponseDto createSchedule(ScheduleRequestDto requestDto) {
 		Schedule schedule = new Schedule(requestDto);

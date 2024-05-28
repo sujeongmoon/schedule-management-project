@@ -1,7 +1,5 @@
 package com.sparta.schedulemanagementproject.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 
 @Getter

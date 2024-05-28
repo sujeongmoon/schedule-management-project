@@ -1,5 +1,8 @@
 package com.sparta.schedulemanagementproject.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.sparta.schedulemanagementproject.dto.ScheduleRequestDto;
 
 import jakarta.persistence.*;
@@ -24,6 +27,14 @@ public class Schedule extends Timestamped{
 	private String userName;
 	@Column(nullable = false, updatable = false)
 	private String schedulePassword;
+
+	@OneToMany(mappedBy = "schedule")
+	private List<Comment> commentList = new ArrayList<>();
+
+	public void addCommentList(Comment comment) {
+		this.commentList.add(comment);
+		comment.setSchedule(this);
+	}
 
 	public Schedule(ScheduleRequestDto requestDto) {
 		this.schedulePassword = requestDto.getSchedulePassword();
