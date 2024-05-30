@@ -19,12 +19,11 @@ public class Comment extends Timestamped{
 	@Column(nullable = false, length = 500)
 	private String commentContents;
 	@Column(nullable = false)
-	private String userId;
+	private Long userId;
 
 	@ManyToOne
 	@JoinColumn(name="scheduleId")
 	private Schedule schedule;
-
 
 	public Comment(CommentRequestDto requestDto, Schedule schedule) {
 		this.commentContents = requestDto.getCommentContents();
@@ -36,15 +35,13 @@ public class Comment extends Timestamped{
 		this.commentContents = requestDto.getCommentContents();
 	}
 
-	// 댓글 내용이 비어있는지 확인
 	public boolean checkContentsNull(CommentRequestDto requestDto) {
 		return "".equals(requestDto.getCommentContents());
 	}
 
-	// 담당자 id가 일치하는지 확인
+
 	public boolean checkUserIdEquals(CommentRequestDto requestDto){
 		return this.getUserId().equals(requestDto.getUserId());
 	}
 
 }
-

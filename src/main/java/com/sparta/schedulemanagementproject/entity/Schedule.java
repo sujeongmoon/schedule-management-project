@@ -31,11 +31,6 @@ public class Schedule extends Timestamped{
 	@OneToMany(mappedBy = "schedule")
 	private List<Comment> commentList = new ArrayList<>();
 
-	public void addCommentList(Comment comment) {
-		this.commentList.add(comment);
-		comment.setSchedule(this);
-	}
-
 	public Schedule(ScheduleRequestDto requestDto) {
 		this.schedulePassword = requestDto.getSchedulePassword();
 		this.scheduleTitle = requestDto.getScheduleTitle();
@@ -55,4 +50,3 @@ public class Schedule extends Timestamped{
 	}
 
 }
-

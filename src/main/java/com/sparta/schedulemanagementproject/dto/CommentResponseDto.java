@@ -11,7 +11,7 @@ public class CommentResponseDto {
 
 	private Long commentId;
 	private String commentContents;
-	private String userId;
+	private Long userId;
 	private Long scheduleId;
 	private LocalDateTime createdAt;
 
@@ -23,4 +23,3 @@ public class CommentResponseDto {
 		this.createdAt = comment.getCreatedAt();
 	}
 }
-

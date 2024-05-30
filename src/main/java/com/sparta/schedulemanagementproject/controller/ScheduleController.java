@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class ScheduleController {
 	private final ScheduleService scheduleService;
 
+	// POST http://localhost:8080/api/schedules
+	// {"scheduleTitle":"제목", "scheduleContents":"내용", "userName":"담당자", "schedulePassword":"1234"}
 	@PostMapping("/schedules")
 	public ResponseEntity<CommonResponse<ScheduleResponseDto>> createSchedule(@RequestBody ScheduleRequestDto requestDto) {
 		ScheduleResponseDto responseDto = scheduleService.createSchedule(requestDto);
@@ -30,6 +32,7 @@ public class ScheduleController {
 				.build());
 	}
 
+	// GET http://localhost:8080/api/schedules/1
 	@GetMapping("/schedules/{id}")
 	public ResponseEntity<CommonResponse<ScheduleResponseDto>> getSchedule(@PathVariable Long id) {
 		ScheduleResponseDto responseDto = scheduleService.getSchedule(id);
@@ -41,6 +44,7 @@ public class ScheduleController {
 				.build());
 	}
 
+	// GET http://localhost:8080/api/schedules
 	@GetMapping("/schedules")
 	public ResponseEntity<CommonResponse<List<ScheduleResponseDto>>> getSchedules() {
 		List<ScheduleResponseDto> responseDtoList = scheduleService.getSchedules();
@@ -52,6 +56,8 @@ public class ScheduleController {
 				.build());
 	}
 
+	// PUT http://localhost:8080/api/schedules/1
+	// {"scheduleTitle":"제목", "scheduleContents":"내용수정", "userName":"담당자", "schedulePassword":"1234"}
 	@PutMapping("/schedules/{id}")
 	public ResponseEntity<CommonResponse<ScheduleResponseDto>> updateMemo(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
 		scheduleService.updateSchedule(id, requestDto);
@@ -64,6 +70,8 @@ public class ScheduleController {
 				.build());
 	}
 
+	// DELETE http://localhost:8080/api/schedules/1
+	// {"schedulePassword":"1234"}
 	@DeleteMapping("/schedules/{id}")
 	public ResponseEntity<CommonResponse> deleteMemo(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
 		scheduleService.deleteSchedule(id, requestDto);
