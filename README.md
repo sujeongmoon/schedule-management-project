@@ -1,20 +1,52 @@
-## 스케줄 관리 프로그램
+## 스케줄 관리 프로그램 Ver.2
 
 * SpringBoot를 사용해서 만든, **스케줄을 관리하는 프로그램**입니다.
 
 
-* 1.일정 작성, 
-* 2.선택한 일정 조회, 
-* 3.일정 목록 조회, 
-* 4.선택한 일정 수정, 
-* 5.선택한 일정 삭제
+------------
+* 일정 작성, 
+* 선택한 일정 조회, 
+* 일정 목록 조회, 
+* 선택한 일정 수정, 
+* 선택한 일정 삭제
+* (이하 추가)
+* 1. 댓글 작성
+* 2. 댓글 수정
+* 3. 댓글 삭제
+* 4. 회원가입
+* 5. 로그인
 * 기능을 제공합니다.
 
 ---
 ### 사용 방법
 
 * 해당 프로젝트에서 ScheduleManagementProjectApplication을 실행시킨 뒤, POSTMAN을 통해 프로그램의 동작을 확인할 수 있습니다.
-* ScheduleController.java 내의 주석을 참고하여 프로그램을 실행시켜보세요.
+* Controller 패키지 내의 주석을 참고하여 프로그램을 실행시켜보세요.
+* 댓글 작성, 댓글 수정, 댓글 삭제를 시도하는 경우, 로그인 이후 생성된 토큰을 헤더에 넣어야지만 실행 가능합니다.
+---
+
+
+### API명세서
+![image](https://github.com/sujeongmoon/schedule-management-project/assets/163665929/3cc9853c-6d96-4797-91b5-ee8f2e3be4f9)
+
+---
+### ERD 다이어그램
+![image](https://github.com/sujeongmoon/schedule-management-project/assets/163665929/9844bf64-0e4c-4ec2-a29f-edea6e5b1d1e)
+
+
+---
+
+### 프로젝트를 진행하며
+
+* Filter 사용 없이 프로젝트를 구현하였다. Spring Security를 사용해도 된다는 걸 나중에서야 알게 되어 아쉬웠다.
+
+* 댓글 입력 시 Schedule을 입력받을 때 Long으로 받는데(Schedule_id), 해당 id를 언제 Schedule 객체로 바꾸어야하는지 잘 모르겠다. 현재 구조는 Long타입 id를 계속 인자로 전달받는 식이다. RequestDto에서 변환하면 좋을 것 같은데 Repository가 Service단에 있다 보니까 Dto에서 Repository를 또 import 시키긴 애매하다고 판단해서 그렇게 해보았는데 좋은 구조인지는 모르겠다.
+
+* 토큰 생성을 제대로 이해하지 못한 것 같다. 현재 구현한 코드에서는 어떻게 생성되고 전달되는지 알 것 같은데, Client 헤더에 쿠키를 포함시킨다는 현재 방법 말고 JWT를 직접 HTTP에 담아서 전달시킨다는 방식은 또 무슨 소리인지 모르겠다. 토큰 관련 공부를 더 해야겠다.
+
+---
+
+이전 내용
 ---
 ### 유스케이스
 
